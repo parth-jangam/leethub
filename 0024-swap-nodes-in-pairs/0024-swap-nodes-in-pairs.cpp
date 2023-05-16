@@ -10,37 +10,30 @@
  */
 class Solution {
 public:
-      ListNode* swapPairs(ListNode* head) {
-        ListNode* temp=head;
-        int data;
-        if(temp==NULL){
+    ListNode* swapPairs(ListNode* head) {
+        if(head==NULL){
             return NULL;
         }
-        temp=temp->next;
-         if(temp==NULL){
+        if(head->next==NULL){
             return head;
         }
-        temp=head;
-      
-        while(temp->next!=NULL){
-            data=temp->val;
-            temp->val=temp->next->val;
-            temp->next->val=data;
-            if(temp->next->next==NULL){
-                // temp=temp->next->next;
-                break;
+        ListNode* temp=nullptr;
+        ListNode* slow=head;
+        ListNode* prev=nullptr;
+        while(slow!=NULL && slow->next!=NULL  ){
+            temp=slow->next;
+            slow->next=temp->next;
+            temp->next=slow;
+            if(prev!=NULL){
+                
+                prev->next=temp;
             }
-            temp=temp->next->next;
-            
-            
+            else{
+                head=temp;
+            }
+            prev=slow;
+            slow=slow->next;
         }
-//         ListNode* temp2= head;
-//         while(temp2!=NULL){
-//             // cout<<temp2->val<<",";
-//             temp2=temp2->next;
-//         }
-         
-        
         return head;
     }
 };
