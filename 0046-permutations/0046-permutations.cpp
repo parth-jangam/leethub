@@ -1,27 +1,27 @@
 class Solution {
 public:
- void permult(vector<int>& nums,vector<vector<int>>&ans,vector<int>dp, map<int,bool>check){
-        if(dp.size()==nums.size()){
-            ans.push_back(dp);
-            return;
+    void permul(vector<int>&nums,vector<vector<int>>&ans,vector<int>&temp,unordered_map<int,bool>&mappe){
+        
+        if(nums.size()==temp.size()){
+            ans.push_back(temp);
+            return ;
         }
         for(int i=0;i<nums.size();i++){
-            if(check[i]==false){
-                dp.push_back(nums[i]);
-                check[i]=true;
-                permult(nums,ans,dp,check);
-                check[i]=false;
-                dp.pop_back();
+            if(!mappe[nums[i]]){
+                mappe[nums[i]]=true;
+                temp.push_back(nums[i]);
+                permul(nums,ans,temp,mappe);
+                temp.pop_back();
+                mappe[nums[i]]=false;
             }
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        
+        sort(nums.begin(),nums.end());
+        unordered_map<int,bool>mappe;
         vector<vector<int>>ans;
-        vector<int>dp;
-        map<int,bool>check;
-         permult(nums,ans,dp,check);
-        
+        vector<int>temp;
+        permul(nums,ans,temp,mappe);
         return ans;
         
     }
