@@ -1,46 +1,38 @@
 class Solution {
 public:
-    void stack_operation(vector<int>&ans,stack<int>&s,int num){
+    int maxi(stack<int>&s,int i){
         if(s.empty()){
-            ans.insert(ans.begin(),-1);
-            
-            return;
+            s.push(i);
+            return -1;
         }
-        if(s.top()>num){
-            ans.insert(ans.begin(),s.top());
-            
-            return;
+        while(!s.empty() && s.top()<i){
+            s.pop();
         }
-        int a= s.top();
-        s.pop();
-        stack_operation(ans,s,num);
-        s.push(a);
-        
+        if(s.empty()){
+            s.push(i);
+            return -1;
+        }
+        int ans=s.top();
+        s.push(i);
+        return ans;
     }
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int, int>mappe;
-        // int i=0;
-        // while(i<nums2.size()){
-        //     mappe[nums2[i]]=i;
-        //     i++;
-        // }
         
-        
-        vector<int>ans;
+        unordered_map<int,int>mappe;
         stack<int>s;
-        int m=nums2.size()-1;
-        for(int i=m;i>=0;i--){
-            stack_operation(ans,s,nums2[i]);
-            mappe[nums2[i]]=ans[0];
-            s.push(nums2[i]);
+        // mappe[nums2[nums2.size()-1]]=-1;
+        // s.push(nums2[nums2.size()-1]);
+        int n=nums2.size();
+        for(int i=n-1;i>=0;i--){
+            int a=maxi(s,nums2[i]);
+            mappe[nums2[i]]=a;
         }
-        int i=0;
-        ans.clear();
-        while(i<nums1.size()){
-            ans.push_back(mappe[nums1[i]]);
-            i++;
+        vector<int>ans;
+        int j=0;
+        while(j<nums1.size()){
+            ans.push_back(mappe[nums1[j]]);
+            j++;
         }
         return ans;
-        
     }
 };
