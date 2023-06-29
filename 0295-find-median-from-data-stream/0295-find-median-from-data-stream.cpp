@@ -7,21 +7,21 @@ public:
     }
     
     void addNum(int num) {
-        if(max_q.empty() || max_q.top()>=num){
-            max_q.push(num);
-        }
-        else{
+        if(min_q.empty() || min_q.top()<=num){
             min_q.push(num);
         }
+        else{
+            max_q.push(num);
+        }
         
-        if(max_q.size()>min_q.size()+1){
-            min_q.push(max_q.top());
-            max_q.pop();
+        if(max_q.size()+1<min_q.size()){
+            max_q.push(min_q.top());
+            min_q.pop();
         }
         else{
-            if(min_q.size()>max_q.size()){
-                max_q.push(min_q.top());
-                min_q.pop();
+            if(max_q.size()>min_q.size()){
+                min_q.push(max_q.top());
+                max_q.pop();
             }
         }
     }
@@ -31,7 +31,7 @@ public:
             return (min_q.top()+max_q.top())/2.0;
         }
         else{
-            return max_q.top();
+            return min_q.top();
         }
     }
 };
