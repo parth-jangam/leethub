@@ -14,7 +14,7 @@ public:
         }
         
         vector<vector<int>>vis(n,vector<int>(m,0));
-        vector<vector<int>>ans(n,vector<int>(m,0));
+        // vector<vector<int>>ans(n,vector<int>(m,0));
         int delrow[]={-1,0,1,0};
         int delcol[]={0,1,0,-1};
         while(!q.empty()){
@@ -26,12 +26,13 @@ public:
                 int nrow=row+delrow[i];
                 int ncol=col+delcol[i];
                 if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && mat[nrow][ncol]==1 && vis[nrow][ncol]==0){
-                    ans[nrow][ncol]=stage+1;
+                    // ans[nrow][ncol]=stage+1;
+                    mat[nrow][ncol]=stage+1;
                     vis[nrow][ncol]=1;
                     q.push({{nrow,ncol},stage+1});
                 }
             }
         }
-        return ans;
+        return mat;
     }
 };
