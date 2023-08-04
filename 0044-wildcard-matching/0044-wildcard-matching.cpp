@@ -7,25 +7,25 @@ public:
         if(j<0 && i>=0){
             return false;
         }
-         if(i<0 && j>=0)
-        {
-            while(j>=0)
-            {
-                if(p[j]=='*') j--;
-                else return false;
+        //  if(i<0 && j>=0)
+        // {
+        //     while(j>=0)
+        //     {
+        //         if(p[j]=='*') j--;
+        //         else return false;
+        //     }
+        //     return true;
+        // }
+        if(i<0 && j>=0){
+            while(j>=0 && p[j]=='*'){
+                j--;
             }
-            return true;
-        }
-//         if(i<0 && j>=0){
-//             while(j>=0 && p[j]=='*'){
-//                 j--;
-//             }
-//             if(j<0){
-//                 return true;
-//             }
-//             return false;
+            if(j<0){
+                return true;
+            }
+            return false;
             
-//         }
+        }
         if(dp[i][j]!=-1){
             return dp[i][j];
         }
