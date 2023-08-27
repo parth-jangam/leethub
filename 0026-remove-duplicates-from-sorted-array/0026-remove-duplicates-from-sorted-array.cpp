@@ -11,5 +11,13 @@ public:
             }
         }
         return nums.size();
+//         unordered_map<int,bool>mappe;
+//         int i=0;
+        
+//         while(i<nums.size()){
+//             mappe[nums[i]]=true;
+//             i++;
+//         }
+//         return mappe.size();
     }
 };
