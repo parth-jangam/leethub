@@ -19,9 +19,7 @@ public:
                 if(m[t[j]]){
                     return false;
                 }
-                // if(mappe.find(t[j])!=mappe.end() && m[t[j]]){
-                //     return false;
-                // }
+                
                 mappe[s[i]]=t[j];
                 m[t[i]]=true;
             }
